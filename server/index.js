@@ -1,6 +1,10 @@
 // ── MUST be first — loads .env before any other require reads process.env ──
 require("dotenv").config();
 
+const dns = require("dns");
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
+
 const express = require("express")
 const cookieParser = require("cookie-parser")
 const app = express();
@@ -96,4 +100,10 @@ io.on('connection', (socket) => {
 app.set('io', io);
 
 // Change app.listen to server.listen
-server.listen(3000, () => console.log('Server running on port 3000'));
+// server.listen(3000, () => console.log('Server running on port 3000'));
+
+const PORT = process.env.PORT || 3000;
+
+server.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running on port ${PORT}`);
+});

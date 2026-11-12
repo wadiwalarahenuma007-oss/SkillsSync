@@ -465,7 +465,7 @@ const EditProfile = () => {
 
     const fetchProfile = async () => {
         try {
-            const response = await fetch('/api/auth/profile', {
+            const response = await fetch("https://skillssync-a4r9.onrender.com/api/auth/profile", {
                 method: 'GET',
                 credentials: 'include',
             });
@@ -664,7 +664,7 @@ const EditProfile = () => {
                 Object.fromEntries(formData.entries())
             );
 
-            const response = await fetch("/api/auth/profile", {
+            const response = await fetch("https://skillssync-a4r9.onrender.com/api/auth/profile", {
                 method: "PUT",
                 credentials: "include",
                 body: formData,

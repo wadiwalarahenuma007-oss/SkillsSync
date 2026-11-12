@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
 import { useAuth } from "../../context/AuthContext";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import LogoDark from "../../assets/Logo-dark.png";
 import React, { useEffect, useState } from "react";
 import LogoLight from "../../assets/Logo-light.png";
@@ -89,7 +89,7 @@ const AdminSidebar = ({ isOpen, onClose }) => {
 
     const confirmLogout = async () => {
         try {
-            await fetch("https://skill-sync-swart-phi.vercel.app/api/auth/logout", {
+            await fetch("https://skillssync-a4r9.onrender.com/api/auth/logout", {
                 method: "POST",
                 credentials: "include",
             });

@@ -94,7 +94,7 @@ const AdminDashboard = () => {
     const fetchDashboard = async () => {
         try {
             const response = await axios.get(
-                "https://skill-sync-swart-phi.vercel.app/api/admin/dashboard"
+                "https://skillssync-a4r9.onrender.com/api/admin/dashboard"
             );
             console.log("FULL RESPONSE", response.data);
 console.log("RECENT USERS", response.data.recentUsers);

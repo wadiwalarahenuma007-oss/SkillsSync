@@ -42,8 +42,8 @@ const Tests = () => {
         const fetchTestsAndStats = async () => {
             try {
                 const [testsRes, statsRes] = await Promise.all([
-                    axios.get("https://skill-sync-swart-phi.vercel.app/api/tests", { withCredentials: true }),
-                    axios.get("https://skill-sync-swart-phi.vercel.app/api/tests/stats", { withCredentials: true })
+                    axios.get("https://skillssync-a4r9.onrender.com/api/tests", { withCredentials: true }),
+                    axios.get("https://skillssync-a4r9.onrender.com/api/tests/stats", { withCredentials: true })
                 ]);
                 setTests(testsRes.data.tests || []);
                 setStats(statsRes.data.stats || { taken: 0, passed: 0, avgScore: 0, coinsEarned: 0 });
@@ -60,7 +60,7 @@ const Tests = () => {
     const startTest = async (testId) => {
         setLoadingTest(true);
         try {
-            const res = await axios.get(`https://skill-sync-swart-phi.vercel.app/api/tests/${testId}`, { withCredentials: true });
+            const res = await axios.get(`https://skillssync-a4r9.onrender.com/api/tests/${testId}`, { withCredentials: true });
             setSelectedTest(res.data.test);
             setAnswers([]);
             setCurrentQuestion(0);
@@ -84,7 +84,7 @@ const Tests = () => {
         setSubmitting(true);
         try {
             const res = await axios.post(
-                `https://skill-sync-swart-phi.vercel.app/api/tests/${selectedTest._id}/attempt`,
+                `https://skillssync-a4r9.onrender.com/api/tests/${selectedTest._id}/attempt`,
                 { answers },
                 { withCredentials: true }
             );
@@ -116,7 +116,7 @@ const Tests = () => {
         setAnswers([]);
         setResult(null);
         // Refresh tests and stats in case stats updated
-        axios.get("https://skill-sync-swart-phi.vercel.app/api/tests/stats", { withCredentials: true })
+        axios.get("https://skillssync-a4r9.onrender.com/api/tests/stats", { withCredentials: true })
              .then(res => setStats(res.data)).catch(console.error);
     };
 

@@ -31,7 +31,7 @@ const Landing = () => {
   });
 
   useEffect(() => {
-    axios.get("https://skill-sync-swart-phi.vercel.app/api/public/stats")
+    axios.get("https://skillssync-a4r9.onrender.com/api/public/stats")
       .then((res) => {
         if (res.data.success) setLiveStats(res.data);
       })
@@ -67,7 +67,7 @@ const Landing = () => {
     setContactStatus("");
     setContactLoading(true);
     try {
-      const res = await axios.post("https://skill-sync-swart-phi.vercel.app/api/contact", {
+      const res = await axios.post("https://skillssync-a4r9.onrender.com/api/contact", {
         name: contactName,
         email: contactEmail,
         subject: contactSubject,

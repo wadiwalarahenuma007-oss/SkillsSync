@@ -39,7 +39,7 @@ const Requests = () => {
         setLoading(true);
         setError("");
         try {
-            const res = await axios.get("https://skill-sync-swart-phi.vercel.app/api/requests/mine", {
+            const res = await axios.get("https://skillssync-a4r9.onrender.com/api/requests/mine", {
                 withCredentials: true,
             });
             setRequests(res.data.requests || []);
@@ -60,7 +60,7 @@ const Requests = () => {
     /* ── Avatar helper ── */
     const avatarSrc = (pic) => {
         if (!pic) return null;
-        return pic.startsWith("http") ? pic : `https://skill-sync-swart-phi.vercel.app${pic}`;
+        return pic.startsWith("http") ? pic : `https://skillssync-a4r9.onrender.com${pic}`;
     };
 
     return (

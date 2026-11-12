@@ -29,7 +29,7 @@ const MentorReviews = () => {
     const fetchReviews = async () => {
       if (!user?._id) return;
       try {
-        const res = await axios.get(`https://skill-sync-swart-phi.vercel.app/api/reviews/mentor/${user._id}`, {
+        const res = await axios.get(`https://skillssync-a4r9.onrender.com/api/reviews/mentor/${user._id}`, {
           withCredentials: true,
         });
         setReviews(res.data.reviews || []);

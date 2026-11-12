@@ -56,7 +56,7 @@ const AdminMembership = () => {
     const fetchMembershipStats = async () => {
         try {
             const res = await axios.get(
-                "https://skill-sync-swart-phi.vercel.app/api/admin/membership"
+                "https://skillssync-a4r9.onrender.com/api/admin/membership"
             );
 
             setStats(res.data);

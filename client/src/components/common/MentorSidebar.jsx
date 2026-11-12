@@ -98,7 +98,7 @@ const MentorSidebar = ({ isOpen, onClose }) => {
     const pic = user?.profilePicture || user?.avatar;
     if (!pic) return null;
     if (pic.startsWith("http") || pic.startsWith("data:")) return pic;
-    return `https://skill-sync-swart-phi.vercel.app${pic}`;
+    return `https://skillssync-a4r9.onrender.com${pic}`;
   };
 
   const avatarUrl = getAvatarSrc(user);
@@ -111,7 +111,7 @@ const MentorSidebar = ({ isOpen, onClose }) => {
 
   const confirmLogout = async () => {
     try {
-      await fetch("https://skill-sync-swart-phi.vercel.app/api/auth/logout", {
+      await fetch("https://skillssync-a4r9.onrender.com/api/auth/logout", {
         method: "POST",
         credentials: "include",
       });
@@ -258,4 +258,5 @@ const MentorSidebar = ({ isOpen, onClose }) => {
   );
 };
 
-export default MentorSidebar;
+export default MentorSidebar;
+

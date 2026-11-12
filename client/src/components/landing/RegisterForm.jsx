@@ -103,7 +103,7 @@ const CreateAccountForm = () => {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        "https://skill-sync-swart-phi.vercel.app/api/auth/register",
+        "https://skillssync-a4r9.onrender.com/api/auth/register",
         { name, email, password, role, qualification, experience, skills, bio },
         { withCredentials: true }
       );
@@ -421,4 +421,5 @@ const CreateAccountForm = () => {
   );
 };
 
-export default CreateAccountForm;
+export default CreateAccountForm;
+

@@ -40,7 +40,7 @@ export default function MentorSessions() {
   const fetchSessions = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("https://skill-sync-swart-phi.vercel.app/api/sessions/mentor", { withCredentials: true });
+      const res = await axios.get("https://skillssync-a4r9.onrender.com/api/sessions/mentor", { withCredentials: true });
       setSessions(res.data.sessions || []);
     } catch (err) {
       console.error("Mentor sessions fetch error:", err.message);
@@ -51,7 +51,7 @@ export default function MentorSessions() {
 
   const fetchStudents = async () => {
     try {
-      const res = await axios.get("https://skill-sync-swart-phi.vercel.app/api/mentor/students", { withCredentials: true });
+      const res = await axios.get("https://skillssync-a4r9.onrender.com/api/mentor/students", { withCredentials: true });
       setMyStudents(res.data.students || []);
     } catch (err) {
       // not critical
@@ -62,7 +62,7 @@ export default function MentorSessions() {
     if (!form.title || !form.studentId) return alert("Title and student are required.");
     setSaving(true);
     try {
-      await axios.post("https://skill-sync-swart-phi.vercel.app/api/sessions", form, { withCredentials: true });
+      await axios.post("https://skillssync-a4r9.onrender.com/api/sessions", form, { withCredentials: true });
       setShowCreate(false);
       setForm({ studentId: "", skill: "", title: "", description: "", scheduledDate: "", startTime: "", duration: "60 min", meetingLink: "" });
       fetchSessions();
@@ -75,7 +75,7 @@ export default function MentorSessions() {
 
   const updateStatus = async (id, status) => {
     try {
-      await axios.put(`https://skill-sync-swart-phi.vercel.app/api/sessions/${id}/status`, { status }, { withCredentials: true });
+      await axios.put(`https://skillssync-a4r9.onrender.com/api/sessions/${id}/status`, { status }, { withCredentials: true });
       setSessions(prev => prev.map(s => s._id === id ? { ...s, status } : s));
     } catch (err) {
       alert("Failed to update status.");
@@ -86,7 +86,7 @@ export default function MentorSessions() {
     if (!linkInput.trim()) return;
     setSaving(true);
     try {
-      await axios.put(`https://skill-sync-swart-phi.vercel.app/api/sessions/${showLinkModal}/meeting-link`, { meetingLink: linkInput.trim() }, { withCredentials: true });
+      await axios.put(`https://skillssync-a4r9.onrender.com/api/sessions/${showLinkModal}/meeting-link`, { meetingLink: linkInput.trim() }, { withCredentials: true });
       setSessions(prev => prev.map(s => s._id === showLinkModal ? { ...s, meetingLink: linkInput.trim() } : s));
       setShowLinkModal(null);
       setLinkInput("");
@@ -190,7 +190,7 @@ export default function MentorSessions() {
                   color: "#fff", fontWeight: 700, fontSize: "0.9rem", flexShrink: 0,
                 }}>
                   {student.profilePicture
-                    ? <img src={student.profilePicture.startsWith("http") ? student.profilePicture : `https://skill-sync-swart-phi.vercel.app/${student.profilePicture.replace(/^\//, "")}`} alt={student.name} style={{ width: "100%", height: "100%", borderRadius: "50%", objectFit: "cover" }} />
+                    ? <img src={student.profilePicture.startsWith("http") ? student.profilePicture : `https://skillssync-a4r9.onrender.com/${student.profilePicture.replace(/^\//, "")}`} alt={student.name} style={{ width: "100%", height: "100%", borderRadius: "50%", objectFit: "cover" }} />
                     : initials}
                 </div>
 

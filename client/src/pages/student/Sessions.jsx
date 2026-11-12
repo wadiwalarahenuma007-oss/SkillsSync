@@ -39,7 +39,7 @@ const StudentSessions = () => {
   const fetchSessions = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("https://skill-sync-swart-phi.vercel.app/api/sessions/mine", { withCredentials: true });
+      const res = await axios.get("https://skillssync-a4r9.onrender.com/api/sessions/mine", { withCredentials: true });
       setSessions(res.data.sessions || []);
     } catch (err) {
       console.error("Sessions fetch error:", err.message);
@@ -166,7 +166,7 @@ const StudentSessions = () => {
               const mentor = session.mentor || {};
               const initials = getInitials(mentor.name || "M");
               const picUrl = mentor.profilePicture
-                ? (mentor.profilePicture.startsWith("http") ? mentor.profilePicture : `https://skill-sync-swart-phi.vercel.app/${mentor.profilePicture.replace(/^\//, "")}`)
+                ? (mentor.profilePicture.startsWith("http") ? mentor.profilePicture : `https://skillssync-a4r9.onrender.com/${mentor.profilePicture.replace(/^\//, "")}`)
                 : null;
 
               return (

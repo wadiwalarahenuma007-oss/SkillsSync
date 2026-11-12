@@ -50,7 +50,7 @@ const AdminReviews = () => {
     // const fetchReviews = async () => {
     //     setLoading(true);
     //     try {
-    //         const res = await axios.get("https://skill-sync-swart-phi.vercel.app/api/admin/reviews", { withCredentials: true });
+    //         const res = await axios.get("https://skillssync-a4r9.onrender.com/api/admin/reviews", { withCredentials: true });
     //         setReviews(res.data.reviews || []);
     //     } catch (err) {
     //         console.error("Admin reviews fetch error:", err.message);
@@ -62,7 +62,7 @@ const AdminReviews = () => {
     const deleteReview = async (id) => {
         if (!window.confirm("Are you sure you want to remove this review?")) return;
         try {
-            await axios.delete(`https://skill-sync-swart-phi.vercel.app/api/admin/reviews/${id}`, { withCredentials: true });
+            await axios.delete(`https://skillssync-a4r9.onrender.com/api/admin/reviews/${id}`, { withCredentials: true });
             setReviews(prev => prev.filter(r => r._id !== id));
         } catch (err) {
             alert(err.response?.data?.message || "Failed to delete review.");

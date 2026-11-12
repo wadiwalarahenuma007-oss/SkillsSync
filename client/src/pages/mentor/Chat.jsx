@@ -20,7 +20,7 @@ const MentorChat = () => {
     setLoadingConvs(true);
     try {
       // ?role=mentor — only conversations where this user is the MENTOR
-      const res = await axios.get('https://skill-sync-swart-phi.vercel.app/api/chat/conversations?role=mentor', { withCredentials: true });
+      const res = await axios.get('https://skillssync-a4r9.onrender.com/api/chat/conversations?role=mentor', { withCredentials: true });
       setConversations(res.data.conversations || []);
     } catch (err) { console.error(err); }
     finally { setLoadingConvs(false); }
@@ -32,10 +32,10 @@ const MentorChat = () => {
     setActiveId(id);
     setLoadingMsgs(true);
     try {
-      const res = await axios.get(`https://skill-sync-swart-phi.vercel.app/api/chat/conversations/${id}/messages`, { withCredentials: true });
+      const res = await axios.get(`https://skillssync-a4r9.onrender.com/api/chat/conversations/${id}/messages`, { withCredentials: true });
       setMessages(res.data.messages || []);
       
-      await axios.put(`https://skill-sync-swart-phi.vercel.app/api/chat/conversations/${id}/read`, {}, { withCredentials: true });
+      await axios.put(`https://skillssync-a4r9.onrender.com/api/chat/conversations/${id}/read`, {}, { withCredentials: true });
       
       setConversations(prev => prev.map(c => c._id === id ? { ...c, studentUnread: 0, mentorUnread: 0 } : c));
     } catch (err) { console.error(err); }
@@ -61,7 +61,7 @@ const MentorChat = () => {
   const handleSendMessage = async (conversationId, text, type = 'text') => {
     try {
       const res = await axios.post(
-        `https://skill-sync-swart-phi.vercel.app/api/chat/conversations/${conversationId}/messages`,
+        `https://skillssync-a4r9.onrender.com/api/chat/conversations/${conversationId}/messages`,
         { text, type },
         { withCredentials: true }
       );

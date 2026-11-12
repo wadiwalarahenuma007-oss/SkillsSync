@@ -30,7 +30,7 @@ export default function CreateTests() {
     const fetchTests = async () => {
         setLoading(true);
         try {
-            const res = await axios.get("https://skill-sync-swart-phi.vercel.app/api/tests/mine", { withCredentials: true });
+            const res = await axios.get("https://skillssync-a4r9.onrender.com/api/tests/mine", { withCredentials: true });
             setTests(res.data.tests || []);
         } catch(err) {
             console.error("Failed to fetch tests", err);
@@ -72,7 +72,7 @@ export default function CreateTests() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("https://skill-sync-swart-phi.vercel.app/api/tests", formData, { withCredentials: true });
+            await axios.post("https://skillssync-a4r9.onrender.com/api/tests", formData, { withCredentials: true });
             setShowModal(false);
             setFormData({
                 title: "", description: "", skill: "", difficulty: "Beginner", duration: 10, coinReward: 20,

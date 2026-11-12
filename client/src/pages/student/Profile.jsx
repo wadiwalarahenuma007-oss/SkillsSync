@@ -54,7 +54,7 @@ const Profile = () => {
 
         const fetchProfile = async () => {
             try {
-                const response = await fetch("/api/auth/profile", {
+                const response = await fetch("https://skillssync-a4r9.onrender.com/api/auth/profile", {
                     method: "GET",
                     credentials: "include",
                 });
@@ -152,7 +152,7 @@ const Profile = () => {
                     <div style={{ position: 'relative', flexShrink: 0 }}>
                         {profile.profilePicture ? (
                             <img
-                                src={`https://skill-sync-swart-phi.vercel.app${profile.profilePicture}`}
+                                src={`https://skillssync-a4r9.onrender.com${profile.profilePicture}`}
                                 alt={profile.name}
                                 className="avatar"
                                 style={{
@@ -267,7 +267,7 @@ const Profile = () => {
                                 setRefreshing(true);
 
                                 try {
-                                    const response = await fetch("/api/auth/profile", {
+                                    const response = await fetch("https://skillssync-a4r9.onrender.com/api/auth/profile", {
                                         method: "GET",
                                         credentials: "include",
                                     });

@@ -11,7 +11,7 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     if (!user?._id) return;
-    const s = io('https://skill-sync-swart-phi.vercel.app', { withCredentials: true });
+    const s = io('https://skillssync-a4r9.onrender.com', { withCredentials: true });
     socketRef.current = s;
     setSocket(s);
     s.emit('join', user._id);

@@ -73,7 +73,7 @@ const LoginForm = () => {
     setForgotLoading(true);
     try {
       const res = await axios.post(
-        "https://skill-sync-swart-phi.vercel.app/api/auth/forgot-password",
+        "https://skillssync-a4r9.onrender.com/api/auth/forgot-password",
         { email: forgotEmail, newPassword: forgotNewPwd, confirmPassword: forgotConfirmPwd }
       );
       if (res.data.success) {
@@ -100,7 +100,7 @@ const LoginForm = () => {
     setLoading(true);
     try {
       const res = await axios.post(
-        "https://skill-sync-swart-phi.vercel.app/api/auth/login",
+        "https://skillssync-a4r9.onrender.com/api/auth/login",
         { email, password },
         { withCredentials: true }
       );

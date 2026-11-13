@@ -297,12 +297,12 @@ export default function MentorSessions() {
               {/* Student select */}
               <div>
                 <label style={{ fontSize: "0.82rem", color: "#94a3b8" }}>Student *</label>
-                <select value={form.studentId} onChange={e => setForm({ ...form, studentId: e.target.value })}
-                  style={{ width: "100%", padding: "0.6rem", borderRadius: "10px", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", color: "inherit", marginTop: "4px" }}>
+                <select
+                  className="session-student-select"
+                  value={form.studentId}
+                  onChange={e => setForm({ ...form, studentId: e.target.value })}
+                >
                   <option value="">Select a student</option>
-                  {/* {myStudents.map(s => (
-                    <option key={s._id} value={s._id}>{s.name} ({s.email})</option>
-                  ))} */}
                   {myStudents.map(student => (
                     <option key={student._id} value={student._id}>
                       {student.name} ({student.email})

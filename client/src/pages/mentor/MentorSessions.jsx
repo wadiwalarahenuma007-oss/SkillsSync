@@ -226,7 +226,7 @@ export default function MentorSessions() {
                   {!session.meetingLink && session.status !== "cancelled" && session.status !== "completed" && (
                     <button onClick={() => { setShowLinkModal(session._id); setLinkInput(""); }}
                       style={{ fontSize: "0.78rem", padding: "5px 12px", borderRadius: "8px", border: "1px solid rgba(139,92,246,0.3)", background: "transparent", color: "#a78bfa", cursor: "pointer", display: "flex", alignItems: "center", gap: "4px" }}>
-                      <RiLinkLine /> Add Meet Link
+                      <RiLinksLine /> Add Meet Link
                     </button>
                   )}
                   {session.status === "upcoming" && (

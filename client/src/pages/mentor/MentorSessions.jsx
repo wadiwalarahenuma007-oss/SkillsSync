@@ -19,14 +19,14 @@ const STATUS_OPTS = ["All Status", "upcoming", "ongoing", "completed", "cancelle
 
 export default function MentorSessions() {
   const { user } = useAuth();
-  const [sessions, setSessions]         = useState([]);
-  const [loading, setLoading]           = useState(true);
-  const [search, setSearch]             = useState("");
+  const [sessions, setSessions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All Status");
-  const [showCreate, setShowCreate]     = useState(false);
+  const [showCreate, setShowCreate] = useState(false);
   const [showLinkModal, setShowLinkModal] = useState(null); // sessionId
-  const [linkInput, setLinkInput]       = useState("");
-  const [saving, setSaving]             = useState(false);
+  const [linkInput, setLinkInput] = useState("");
+  const [saving, setSaving] = useState(false);
 
   /* ── Create form state ── */
   const [form, setForm] = useState({
@@ -49,12 +49,36 @@ export default function MentorSessions() {
     }
   };
 
+  // const fetchStudents = async () => {
+  //   try {
+  //     const res = await axios.get("https://skillssync-a4r9.onrender.com/api/mentor/students", { withCredentials: true });
+  //     setMyStudents(res.data.students || []);
+  //   } catch (err) {
+  //     // not critical
+  //   }
+  // };
+
   const fetchStudents = async () => {
     try {
-      const res = await axios.get("https://skillssync-a4r9.onrender.com/api/mentor/students", { withCredentials: true });
-      setMyStudents(res.data.students || []);
+      const res = await axios.get("https://skillssync-a4r9.onrender.com/api/mentor/students", {
+        withCredentials: true
+      });
+
+      const rows = res.data.students || [];
+
+      const uniqueStudents = Array.from(
+        new Map(
+          rows
+            .filter(item => item.student?._id)
+            .map(item => [String(item.student._id), item.student])
+        ).values()
+      );
+
+      setMyStudents(uniqueStudents);
+
     } catch (err) {
-      // not critical
+      console.error("Fetch Students Error:", err.response?.data || err.message);
+      setMyStudents([]);
     }
   };
 
@@ -108,7 +132,7 @@ export default function MentorSessions() {
   });
 
   const stats = {
-    upcoming:  sessions.filter(s => s.status === "upcoming").length,
+    upcoming: sessions.filter(s => s.status === "upcoming").length,
     completed: sessions.filter(s => s.status === "completed").length,
     cancelled: sessions.filter(s => s.status === "cancelled").length,
   };
@@ -276,8 +300,13 @@ export default function MentorSessions() {
                 <select value={form.studentId} onChange={e => setForm({ ...form, studentId: e.target.value })}
                   style={{ width: "100%", padding: "0.6rem", borderRadius: "10px", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", color: "inherit", marginTop: "4px" }}>
                   <option value="">Select a student</option>
-                  {myStudents.map(s => (
+                  {/* {myStudents.map(s => (
                     <option key={s._id} value={s._id}>{s.name} ({s.email})</option>
+                  ))} */}
+                  {myStudents.map(student => (
+                    <option key={student._id} value={student._id}>
+                      {student.name} ({student.email})
+                    </option>
                   ))}
                 </select>
               </div>

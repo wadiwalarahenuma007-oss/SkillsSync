@@ -16,8 +16,6 @@ const mentorRoutes = require("./routes/mentorRoutes");
 const requestRoutes = require("./routes/requestRoutes");
 const notificationRoutes = require("./routes/notificationRoutes");
 
-const restoreBackupRoutes = require("./routes/restoreBackupRoutes");
-
 // db + startup checks
 const connectDB = require("./config/db");
 const { verifyMailTransporter } = require("./controllers/contactController");
@@ -80,7 +78,7 @@ app.get("/", (req, res) => {
   res.send("hello");
 });
 
-app.use("/api/internal/restore", restoreBackupRoutes);
+
 
 const http = require("http");
 const { Server } = require("socket.io");

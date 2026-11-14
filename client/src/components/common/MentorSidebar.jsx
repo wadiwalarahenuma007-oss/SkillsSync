@@ -206,6 +206,7 @@ const MentorSidebar = ({ isOpen, onClose }) => {
             key={item.to}
             to={item.to}
             end={item.to === "/mentor"}
+            onClick={onClose} // Close sidebar on link click
             className={({ isActive }) =>
               isActive
                 ? "mentor-link active"

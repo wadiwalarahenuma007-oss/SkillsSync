@@ -10,10 +10,11 @@ import {
   RiSendPlaneFill,
   RiCheckDoubleLine,
   RiLinksLine,
-  RiFileList3Line
+  RiFileList3Line,
+  RiArrowLeftLine
 } from "react-icons/ri";
 
-const ChatWindow = ({ conversation, messages, onSendMessage, currentUserId, currentUserRole, loading }) => {
+const ChatWindow = ({ conversation, messages, onSendMessage, currentUserId, currentUserRole, loading, onBack }) => {
   const [draft, setDraft] = useState("");
   const [showLinkInput, setShowLinkInput] = useState(false);
   const [linkType, setLinkType] = useState('meeting_link');
@@ -41,14 +42,14 @@ const ChatWindow = ({ conversation, messages, onSendMessage, currentUserId, curr
 
   const handleSend = () => {
     if (!draft.trim()) return;
-    
+
     if (showLinkInput) {
       onSendMessage(conversation._id, draft.trim(), linkType);
       setShowLinkInput(false);
     } else {
       onSendMessage(conversation._id, draft.trim(), 'text');
     }
-    
+
     setDraft("");
   };
 
@@ -68,6 +69,14 @@ const ChatWindow = ({ conversation, messages, onSendMessage, currentUserId, curr
       {/* Header */}
       <div className="chat-win-header">
         <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+          <button
+            type="button"
+            className="chat-mobile-back"
+            onClick={onBack}
+            aria-label="Back to conversations"
+          >
+            <RiArrowLeftLine size={22} />
+          </button>
           <div style={{ position: "relative", flexShrink: 0 }}>
             <div style={{
               width: 40, height: 40, borderRadius: "9999px",
@@ -112,11 +121,11 @@ const ChatWindow = ({ conversation, messages, onSendMessage, currentUserId, curr
           messages?.map((m) => {
             const isMe = m.sender._id === currentUserId;
             const timeStr = new Date(m.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            
+
             return (
               <div key={m._id} style={{ display: "flex", justifyContent: isMe ? "flex-end" : "flex-start" }}>
                 <div className={isMe ? "msg-bubble-me" : "msg-bubble-them"} style={{ maxWidth: '75%' }}>
-                  
+
                   {m.type === 'meeting_link' ? (
                     <div style={{ background: 'linear-gradient(135deg, rgba(59,130,246,0.2), rgba(139,92,246,0.2))', border: '1px solid rgba(59,130,246,0.4)', borderRadius: '12px', padding: '12px 16px', maxWidth: 300 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
@@ -151,7 +160,7 @@ const ChatWindow = ({ conversation, messages, onSendMessage, currentUserId, curr
 
       {/* Message input */}
       <div className="chat-input-bar" style={{ flexDirection: 'column', alignItems: 'stretch' }}>
-        
+
         {showLinkInput && (
           <div style={{ display: 'flex', padding: '8px', background: 'rgba(15,23,42,0.5)', borderRadius: '8px', marginBottom: '8px', alignItems: 'center', gap: '8px' }}>
             <span style={{ fontSize: '0.8rem', color: '#a78bfa', fontWeight: 600, whiteSpace: 'nowrap' }}>
@@ -198,7 +207,7 @@ const ChatWindow = ({ conversation, messages, onSendMessage, currentUserId, curr
               />
               <div style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", display: "flex", gap: "0.75rem" }}>
                 <RiEmotionLine size={18} className="chat-input-icon" style={{ cursor: "pointer" }} />
-                <RiMicLine    size={18} className="chat-input-icon" style={{ cursor: "pointer" }} />
+                <RiMicLine size={18} className="chat-input-icon" style={{ cursor: "pointer" }} />
               </div>
             </div>
           )}

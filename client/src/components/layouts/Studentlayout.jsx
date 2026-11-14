@@ -21,7 +21,7 @@ const StudentLayout = () => {
       <header className="mobile-header">
         <button
           onClick={() => setSidebarOpen(true)}
-          className="mobile-menu-btn"
+          className="mobile-menu-button"
         >
           <RiMenuLine size={26} />
         </button>
@@ -31,13 +31,13 @@ const StudentLayout = () => {
         </span>
       </header>
 
-      {/* Overlay */}
+      {/* Overlay
       {sidebarOpen && (
         <div
           className="sidebar-overlay"
           onClick={() => setSidebarOpen(false)}
         />
-      )}
+      )} */}
 
       {/* Main Content */}
       <main className="main-content">

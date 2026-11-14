@@ -6,12 +6,14 @@ import ConversationsPanel from '../../components/chat/ConversationsPanel';
 import ChatWindow from '../../components/chat/ChatWindow';
 import RightPanel from '../../components/chat/RightPanel';
 // import '../../styles/Student/Chat.css';
+import '../../styles/Student/Chat.css';
 
 const MentorChat = () => {
   const { user } = useAuth();
   const socket = useSocket();
   const [conversations, setConversations] = useState([]);
   const [activeId, setActiveId] = useState(null);
+  const [mobileChatOpen, setMobileChatOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [loadingConvs, setLoadingConvs] = useState(true);
   const [loadingMsgs, setLoadingMsgs] = useState(false);
@@ -30,13 +32,14 @@ const MentorChat = () => {
 
   const selectConversation = async (id) => {
     setActiveId(id);
+    setMobileChatOpen(true);
     setLoadingMsgs(true);
     try {
       const res = await axios.get(`https://skillssync-a4r9.onrender.com/api/chat/conversations/${id}/messages`, { withCredentials: true });
       setMessages(res.data.messages || []);
-      
+
       await axios.put(`https://skillssync-a4r9.onrender.com/api/chat/conversations/${id}/read`, {}, { withCredentials: true });
-      
+
       setConversations(prev => prev.map(c => c._id === id ? { ...c, studentUnread: 0, mentorUnread: 0 } : c));
     } catch (err) { console.error(err); }
     finally { setLoadingMsgs(false); }
@@ -67,13 +70,13 @@ const MentorChat = () => {
       );
       const newMsg = res.data.message;
       setMessages(prev => [...prev, newMsg]);
-      
+
       setConversations(prev => prev.map(c =>
         c._id === conversationId
           ? { ...c, lastMessage: text.substring(0, 60), lastMessageAt: new Date().toISOString() }
           : c
       ));
-      
+
       const conv = conversations.find(c => c._id === conversationId);
       if (conv && socket) {
         const recipientId = conv.student._id === user._id ? conv.mentor._id : conv.student._id;
@@ -85,7 +88,7 @@ const MentorChat = () => {
   const activeConversation = conversations.find(c => c._id === activeId);
 
   return (
-    <div className="chat-page">
+    <div className={`chat-page${mobileChatOpen ? " mobile-chat-open" : ""}`}>
       <ConversationsPanel
         conversations={conversations}
         activeId={activeId}
@@ -100,6 +103,7 @@ const MentorChat = () => {
         currentUserId={user?._id}
         currentUserRole={'mentor'}
         loading={loadingMsgs}
+        onBack={() => setMobileChatOpen(false)}
       />
       <RightPanel
         conversation={activeConversation}

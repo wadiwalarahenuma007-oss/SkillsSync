@@ -20,55 +20,55 @@ import { useAuth } from "../../context/AuthContext";
 
 /* ── Type config — keys match Notification.type in DB ── */
 const typeConfig = {
-  Requests:     { icon: <RiHandHeartLine />,    color: "purple" },
-  Messages:     { icon: <RiChat3Line />,         color: "indigo" },
-  Sessions:     { icon: <RiCalendarEventLine />, color: "cyan"   },
-  Achievements: { icon: <RiTrophyLine />,        color: "amber"  },
-  Accepted:     { icon: <RiCheckLine />,         color: "green"  },
-  System:       { icon: <RiMegaphoneLine />,     color: "orange" },
+  Requests: { icon: <RiHandHeartLine />, color: "purple" },
+  Messages: { icon: <RiChat3Line />, color: "indigo" },
+  Sessions: { icon: <RiCalendarEventLine />, color: "cyan" },
+  Achievements: { icon: <RiTrophyLine />, color: "amber" },
+  Accepted: { icon: <RiCheckLine />, color: "green" },
+  System: { icon: <RiMegaphoneLine />, color: "orange" },
 };
 
 /* ── Color palettes for DARK theme ── */
 const darkPalette = {
   purple: { dot: "#a855f7", boxBg: "rgba(88,28,135,0.25)", boxBorder: "rgba(147,51,234,0.5)", text: "#c4b5fd", btnBorder: "#a855f7", btnText: "#c4b5fd" },
   indigo: { dot: "#6366f1", boxBg: "rgba(49,46,129,0.25)", boxBorder: "rgba(99,102,241,0.5)", text: "#a5b4fc", btnBorder: "#6366f1", btnText: "#a5b4fc" },
-  cyan:   { dot: "#22d3ee", boxBg: "rgba(8,145,178,0.15)", boxBorder: "rgba(34,211,238,0.5)", text: "#67e8f9", btnBorder: "#22d3ee", btnText: "#67e8f9" },
-  amber:  { dot: "#fbbf24", boxBg: "rgba(120,53,15,0.2)",  boxBorder: "rgba(245,158,11,0.5)", text: "#fcd34d", btnBorder: "#fbbf24", btnText: "#fcd34d" },
-  green:  { dot: "#34d399", boxBg: "rgba(6,78,59,0.2)",    boxBorder: "rgba(52,211,153,0.5)", text: "#6ee7b7", btnBorder: "#34d399", btnText: "#6ee7b7" },
-  orange: { dot: "#fb923c", boxBg: "rgba(124,45,18,0.2)",  boxBorder: "rgba(251,146,60,0.5)", text: "#fdba74", btnBorder: "#fb923c", btnText: "#fdba74" },
+  cyan: { dot: "#22d3ee", boxBg: "rgba(8,145,178,0.15)", boxBorder: "rgba(34,211,238,0.5)", text: "#67e8f9", btnBorder: "#22d3ee", btnText: "#67e8f9" },
+  amber: { dot: "#fbbf24", boxBg: "rgba(120,53,15,0.2)", boxBorder: "rgba(245,158,11,0.5)", text: "#fcd34d", btnBorder: "#fbbf24", btnText: "#fcd34d" },
+  green: { dot: "#34d399", boxBg: "rgba(6,78,59,0.2)", boxBorder: "rgba(52,211,153,0.5)", text: "#6ee7b7", btnBorder: "#34d399", btnText: "#6ee7b7" },
+  orange: { dot: "#fb923c", boxBg: "rgba(124,45,18,0.2)", boxBorder: "rgba(251,146,60,0.5)", text: "#fdba74", btnBorder: "#fb923c", btnText: "#fdba74" },
 };
 
 /* ── Color palettes for LIGHT theme ── */
 const lightPalette = {
   purple: { dot: "#7c3aed", boxBg: "rgba(124,58,237,0.08)", boxBorder: "rgba(124,58,237,0.3)", text: "#5b21b6", btnBorder: "#7c3aed", btnText: "#5b21b6" },
-  indigo: { dot: "#4f46e5", boxBg: "rgba(79,70,229,0.08)",  boxBorder: "rgba(79,70,229,0.3)",  text: "#3730a3", btnBorder: "#4f46e5", btnText: "#3730a3" },
-  cyan:   { dot: "#0891b2", boxBg: "rgba(8,145,178,0.08)",  boxBorder: "rgba(8,145,178,0.3)",  text: "#0e7490", btnBorder: "#0891b2", btnText: "#0e7490" },
-  amber:  { dot: "#d97706", boxBg: "rgba(217,119,6,0.08)",  boxBorder: "rgba(217,119,6,0.3)",  text: "#92400e", btnBorder: "#d97706", btnText: "#92400e" },
-  green:  { dot: "#059669", boxBg: "rgba(5,150,105,0.08)",  boxBorder: "rgba(5,150,105,0.3)",  text: "#065f46", btnBorder: "#059669", btnText: "#065f46" },
-  orange: { dot: "#ea580c", boxBg: "rgba(234,88,12,0.08)",  boxBorder: "rgba(234,88,12,0.3)",  text: "#9a3412", btnBorder: "#ea580c", btnText: "#9a3412" },
+  indigo: { dot: "#4f46e5", boxBg: "rgba(79,70,229,0.08)", boxBorder: "rgba(79,70,229,0.3)", text: "#3730a3", btnBorder: "#4f46e5", btnText: "#3730a3" },
+  cyan: { dot: "#0891b2", boxBg: "rgba(8,145,178,0.08)", boxBorder: "rgba(8,145,178,0.3)", text: "#0e7490", btnBorder: "#0891b2", btnText: "#0e7490" },
+  amber: { dot: "#d97706", boxBg: "rgba(217,119,6,0.08)", boxBorder: "rgba(217,119,6,0.3)", text: "#92400e", btnBorder: "#d97706", btnText: "#92400e" },
+  green: { dot: "#059669", boxBg: "rgba(5,150,105,0.08)", boxBorder: "rgba(5,150,105,0.3)", text: "#065f46", btnBorder: "#059669", btnText: "#065f46" },
+  orange: { dot: "#ea580c", boxBg: "rgba(234,88,12,0.08)", boxBorder: "rgba(234,88,12,0.3)", text: "#9a3412", btnBorder: "#ea580c", btnText: "#9a3412" },
 };
 
 
 /* ── Group notifications by date label ── */
 const getGroup = (dateStr) => {
-  const d     = new Date(dateStr);
-  const now   = new Date();
+  const d = new Date(dateStr);
+  const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const yest  = new Date(today); yest.setDate(today.getDate() - 1);
+  const yest = new Date(today); yest.setDate(today.getDate() - 1);
   const nDate = new Date(d.getFullYear(), d.getMonth(), d.getDate());
   if (nDate.getTime() === today.getTime()) return "Today";
-  if (nDate.getTime() === yest.getTime())  return "Yesterday";
+  if (nDate.getTime() === yest.getTime()) return "Yesterday";
   return d.toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" });
 };
 
 /* ── Time ago helper ── */
 const timeAgo = (dateStr) => {
   const diff = Date.now() - new Date(dateStr).getTime();
-  const mins  = Math.floor(diff / 60000);
+  const mins = Math.floor(diff / 60000);
   const hours = Math.floor(diff / 3600000);
-  const days  = Math.floor(diff / 86400000);
-  if (mins < 1)   return "Just now";
-  if (mins < 60)  return `${mins} min${mins > 1 ? "s" : ""} ago`;
+  const days = Math.floor(diff / 86400000);
+  if (mins < 1) return "Just now";
+  if (mins < 60) return `${mins} min${mins > 1 ? "s" : ""} ago`;
   if (hours < 24) return `${hours} hour${hours > 1 ? "s" : ""} ago`;
   return `${days} day${days > 1 ? "s" : ""} ago`;
 };
@@ -95,12 +95,12 @@ const Notifications = () => {
   }, [user]);
 
   const [notifications, setNotifications] = useState([]);
-  const [loading,       setLoading]        = useState(true);
-  const [activeTab,     setActiveTab]      = useState("All");
-  const [menuOpen,      setMenuOpen]       = useState(false);
-  const [search,        setSearch]         = useState("");
-  const [readFilter,    setReadFilter]     = useState("all");   // "all" | "unread" | "read"
-  const [dropdownOpen,  setDropdownOpen]   = useState(false);   // "All Notifications" dropdown
+  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("All");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  const [readFilter, setReadFilter] = useState("all");   // "all" | "unread" | "read"
+  const [dropdownOpen, setDropdownOpen] = useState(false);   // "All Notifications" dropdown
   const dropdownRef = useRef(null);
 
   /* ── Close dropdown on outside click ── */
@@ -184,7 +184,7 @@ const Notifications = () => {
         n.title.toLowerCase().includes(search.toLowerCase()) ||
         n.message.toLowerCase().includes(search.toLowerCase())
       ),
-  [notifications, activeTab, search, currentRole, readFilter]);
+    [notifications, activeTab, search, currentRole, readFilter]);
 
 
   /* ── Group by date ── */
@@ -195,7 +195,7 @@ const Notifications = () => {
       acc[g].push(n);
       return acc;
     }, {}),
-  [filtered]);
+    [filtered]);
 
   return (
     <div className="notifications-page">
@@ -255,83 +255,83 @@ const Notifications = () => {
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", position: "relative" }}>
-          {/* ── All Notifications read-filter dropdown ── */}
-          <div style={{ position: "relative" }} ref={dropdownRef}>
-            <button
-              onClick={() => setDropdownOpen((o) => !o)}
-              style={{
-                display: "flex", alignItems: "center", gap: "0.5rem",
-                padding: "0.5rem 1rem", borderRadius: "0.75rem",
-                border: isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid #e5e7eb",
-                background: isDark ? "#1a1a2e" : "#ffffff",
-                color: isDark ? "#94a3b8" : "#6b7280",
-                fontSize: "0.875rem", cursor: "pointer",
-              }}
-            >
-              {readFilter === "all" ? "All Notifications" : readFilter === "unread" ? "Unread" : "Read"}
-              <RiArrowDownSLine size={16} style={{ transition: "transform 0.2s", transform: dropdownOpen ? "rotate(180deg)" : "none" }} />
-            </button>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", position: "relative" }}>
+            {/* ── All Notifications read-filter dropdown ── */}
+            <div style={{ position: "relative" }} ref={dropdownRef}>
+              <button
+                onClick={() => setDropdownOpen((o) => !o)}
+                style={{
+                  display: "flex", alignItems: "center", gap: "0.5rem",
+                  padding: "0.5rem 1rem", borderRadius: "0.75rem",
+                  border: isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid #e5e7eb",
+                  background: isDark ? "#1a1a2e" : "#ffffff",
+                  color: isDark ? "#94a3b8" : "#6b7280",
+                  fontSize: "0.875rem", cursor: "pointer",
+                }}
+              >
+                {readFilter === "all" ? "All Notifications" : readFilter === "unread" ? "Unread" : "Read"}
+                <RiArrowDownSLine size={16} style={{ transition: "transform 0.2s", transform: dropdownOpen ? "rotate(180deg)" : "none" }} />
+              </button>
 
-            {dropdownOpen && (
-              <div style={{
-                position: "absolute", top: "calc(100% + 6px)", right: 0, zIndex: 50,
-                background: isDark ? "#1a1a2e" : "#ffffff",
-                border: isDark ? "1px solid rgba(255,255,255,0.1)" : "1px solid #e5e7eb",
-                borderRadius: "0.75rem", minWidth: 160,
-                boxShadow: "0 8px 24px rgba(0,0,0,0.2)", overflow: "hidden",
-              }}>
-                {[
-                  { value: "all",    label: "All Notifications" },
-                  { value: "unread", label: "Unread" },
-                  { value: "read",   label: "Read" },
-                ].map((opt) => (
-                  <button
-                    key={opt.value}
-                    onClick={() => { setReadFilter(opt.value); setDropdownOpen(false); }}
-                    style={{
-                      display: "block", width: "100%", textAlign: "left",
-                      padding: "0.6rem 1rem", background: "transparent",
-                      border: "none", cursor: "pointer",
-                      color: readFilter === opt.value
-                        ? "#a78bfa"
-                        : isDark ? "#94a3b8" : "#6b7280",
-                      fontWeight: readFilter === opt.value ? 700 : 400,
-                      fontSize: "0.875rem",
-                    }}
-                    onMouseOver={(e) => { e.currentTarget.style.background = "rgba(139,92,246,0.1)"; e.currentTarget.style.color = "#a78bfa"; }}
-                    onMouseOut={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = readFilter === opt.value ? "#a78bfa" : isDark ? "#94a3b8" : "#6b7280"; }}
-                  >
-                    {opt.label}
+              {dropdownOpen && (
+                <div style={{
+                  position: "absolute", top: "calc(100% + 6px)", right: 0, zIndex: 50,
+                  background: isDark ? "#1a1a2e" : "#ffffff",
+                  border: isDark ? "1px solid rgba(255,255,255,0.1)" : "1px solid #e5e7eb",
+                  borderRadius: "0.75rem", minWidth: 160,
+                  boxShadow: "0 8px 24px rgba(0,0,0,0.2)", overflow: "hidden",
+                }}>
+                  {[
+                    { value: "all", label: "All Notifications" },
+                    { value: "unread", label: "Unread" },
+                    { value: "read", label: "Read" },
+                  ].map((opt) => (
+                    <button
+                      key={opt.value}
+                      onClick={() => { setReadFilter(opt.value); setDropdownOpen(false); }}
+                      style={{
+                        display: "block", width: "100%", textAlign: "left",
+                        padding: "0.6rem 1rem", background: "transparent",
+                        border: "none", cursor: "pointer",
+                        color: readFilter === opt.value
+                          ? "#a78bfa"
+                          : isDark ? "#94a3b8" : "#6b7280",
+                        fontWeight: readFilter === opt.value ? 700 : 400,
+                        fontSize: "0.875rem",
+                      }}
+                      onMouseOver={(e) => { e.currentTarget.style.background = "rgba(139,92,246,0.1)"; e.currentTarget.style.color = "#a78bfa"; }}
+                      onMouseOut={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = readFilter === opt.value ? "#a78bfa" : isDark ? "#94a3b8" : "#6b7280"; }}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* ── More menu (⋯) ── */}
+            <div style={{ position: "relative" }}>
+              <button
+                onClick={() => setMenuOpen((o) => !o)}
+                style={{
+                  width: 36, height: 36, borderRadius: "0.75rem",
+                  border: isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid #e5e7eb",
+                  background: isDark ? "#1a1a2e" : "#ffffff",
+                  color: isDark ? "#94a3b8" : "#6b7280",
+                  cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+                }}
+              >
+                <RiMoreLine size={18} />
+              </button>
+              {menuOpen && (
+                <div className="notif-more-menu">
+                  <button onClick={markAllRead} style={{ color: "#94a3b8" }} onMouseOver={(e) => { e.currentTarget.style.background = "rgba(139,92,246,0.1)"; e.currentTarget.style.color = "#a78bfa"; }} onMouseOut={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#94a3b8"; }}>
+                    Mark all as read
                   </button>
-                ))}
-              </div>
-            )}
+                </div>
+              )}
+            </div>
           </div>
-
-          {/* ── More menu (⋯) ── */}
-          <div style={{ position: "relative" }}>
-            <button
-              onClick={() => setMenuOpen((o) => !o)}
-              style={{
-                width: 36, height: 36, borderRadius: "0.75rem",
-                border: isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid #e5e7eb",
-                background: isDark ? "#1a1a2e" : "#ffffff",
-                color: isDark ? "#94a3b8" : "#6b7280",
-                cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-              }}
-            >
-              <RiMoreLine size={18} />
-            </button>
-            {menuOpen && (
-              <div className="notif-more-menu">
-                <button onClick={markAllRead} style={{ color: "#94a3b8" }} onMouseOver={(e) => { e.currentTarget.style.background = "rgba(139,92,246,0.1)"; e.currentTarget.style.color = "#a78bfa"; }} onMouseOut={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#94a3b8"; }}>
-                  Mark all as read
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
 
         </div>
       </div>
@@ -352,13 +352,17 @@ const Notifications = () => {
 
               <div style={{ position: "relative" }}>
                 {items.map((n, idx) => {
-                  const cfg   = typeConfig[n.type] || typeConfig.System;
-                  const pal   = colorPalette[cfg.color];
+                  const cfg = typeConfig[n.type] || typeConfig.System;
+                  const pal = colorPalette[cfg.color];
                   const isLast = idx === items.length - 1;
-                  const clock  = new Date(n.createdAt).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
+                  const clock = new Date(n.createdAt).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
 
                   return (
-                    <div key={n._id} style={{ display: "flex", gap: "1.25rem" }}>
+                    <div
+                      key={n._id}
+                      className="notif-item-row"
+                      style={{ display: "flex", gap: "1.25rem" }}
+                    >
                       {/* Timeline dot */}
                       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 24, flexShrink: 0 }}>
                         <span
@@ -388,7 +392,16 @@ const Notifications = () => {
                           <p style={{ margin: "0.375rem 0 0", fontSize: "0.75rem", color: "#64748b" }}>{clock}</p>
                         </div>
 
-                        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "0.75rem", flexShrink: 0 }}>
+                        <div
+                          className="notif-card-actions"
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "flex-end",
+                            gap: "0.75rem",
+                            flexShrink: 0
+                          }}
+                        >
                           <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                             <span style={{ fontSize: "0.75rem", color: "#94a3b8" }}>{timeAgo(n.createdAt)}</span>
                             <button

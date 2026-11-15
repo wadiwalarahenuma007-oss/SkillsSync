@@ -671,3 +671,44 @@ body.light .chat-invite-desc {
     min-height: 0;
   }
 }
+
+/* RESPONSIVE CHAT LAYOUT */
+
+@media screen and (max-width: 768px) {
+  .chat-page {
+    display: flex;
+    width: 100%;
+    height: calc(100dvh - 58px);
+    overflow: hidden;
+  }
+
+  /* Conversations screen */
+  .chat-page .chat-conversations-panel {
+    display: flex;
+    width: 100%;
+    min-width: 100%;
+    flex: 0 0 100%;
+  }
+
+  /* Hide chat initially */
+  .chat-page .chat-window {
+    display: none;
+    width: 100%;
+    min-width: 100%;
+    flex: 0 0 100%;
+  }
+
+  /* Hide right panel */
+  .chat-page .chat-right-panel {
+    display: none;
+  }
+
+  /* Open selected person's chat */
+  .chat-page.mobile-chat-open .chat-conversations-panel {
+    display: none;
+  }
+
+  .chat-page.mobile-chat-open .chat-window {
+    display: flex;
+  }
+}

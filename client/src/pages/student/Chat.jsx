@@ -29,21 +29,56 @@ const Chat = () => {
 
   useEffect(() => { fetchConversations(); }, [fetchConversations]);
 
+  // const selectConversation = async (id) => {
+  //   setActiveId(id);
+  //   setMobileChatOpen(true);
+  //   setLoadingMsgs(true);
+  //   try {
+  //     const res = await axios.get(`https://skillssync-a4r9.onrender.com/api/chat/conversations/${id}/messages`, { withCredentials: true });
+  //     setMessages(res.data.messages || []);
+
+  //     await axios.put(`https://skillssync-a4r9.onrender.com/api/chat/conversations/${id}/read`, {}, { withCredentials: true });
+
+  //     setConversations(prev => prev.map(c => c._id === id ? { ...c, studentUnread: 0, mentorUnread: 0 } : c));
+  //   } catch (err) { console.error(err); }
+  //   finally { setLoadingMsgs(false); }
+  // };
+
   const selectConversation = async (id) => {
     setActiveId(id);
-    setMobileChatOpen(true);
+
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      setMobileChatOpen(true);
+    }
+
     setLoadingMsgs(true);
+
     try {
-      const res = await axios.get(`https://skillssync-a4r9.onrender.com/api/chat/conversations/${id}/messages`, { withCredentials: true });
+      const res = await axios.get(
+        `https://skillssync-a4r9.onrender.com/api/chat/conversations/${id}/messages`,
+        { withCredentials: true }
+      );
+
       setMessages(res.data.messages || []);
 
-      await axios.put(`https://skillssync-a4r9.onrender.com/api/chat/conversations/${id}/read`, {}, { withCredentials: true });
+      await axios.put(
+        `https://skillssync-a4r9.onrender.com/api/chat/conversations/${id}/read`,
+        {},
+        { withCredentials: true }
+      );
 
-      setConversations(prev => prev.map(c => c._id === id ? { ...c, studentUnread: 0, mentorUnread: 0 } : c));
-    } catch (err) { console.error(err); }
-    finally { setLoadingMsgs(false); }
+      setConversations(prev => prev.map(c =>
+        c._id === id
+          ? { ...c, studentUnread: 0, mentorUnread: 0 }
+          : c
+      ));
+
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoadingMsgs(false);
+    }
   };
-
   useEffect(() => {
     if (!socket) return;
     const handler = ({ conversationId, message }) => {

@@ -263,3 +263,36 @@
 
     box-sizing: border-box;
 }
+
+
+@media screen and (max-width: 768px) {
+    .student-layout {
+        display: flex;
+        flex-direction: column;
+        height: 100dvh;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    .mobile-header {
+        height: 56px;
+        min-height: 56px;
+        flex-shrink: 0;
+    }
+
+    .main-content {
+        flex: 1;
+        height: 0;
+        min-height: 0;
+        margin-left: 0 !important;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .student-page-container {
+        height: 100%;
+        min-height: 0;
+        width: 100%;
+        overflow: hidden;
+    }
+}
